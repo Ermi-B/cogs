@@ -4,6 +4,7 @@ const revenuePerHourInput = document.getElementById('revenue-per-hour');
 const headCountInput = document.getElementById('head-count');
 const hoursInput = document.getElementById('hours');
 const totalFuelCostInput = document.getElementById('total-fuel-cost');
+
 const fuelAddedGallonsInput = document.getElementById('fuel-added-gallons');
 const pricePerGallonInput = document.getElementById('price-per-gallon');
 const totalDumpFeesInput = document.getElementById('total-dump-fees');
@@ -12,6 +13,7 @@ const scrapMetalInput = document.getElementById('scrap-metal');
 
 const fuelCostDisplay = document.getElementById('fuel-cost-display'); 
 const laborCostDisplay = document.getElementById('labor-cost-display');
+
 const finalCogDisplay = document.getElementById('final-cog-display');
 const profitDisplay = document.getElementById('profit-display');
 
@@ -31,6 +33,7 @@ function calculateCOGSPercentage() {
     // Calculate the total cost
     const laborCost = revenuePerHour * headCount * hours;
     const fuelCost = fuelAddedGallons * pricePerGallon;
+    laborCostDisplay.textContent = fuelCost
     const totalCost = laborCost + fuelCost + totalDumpFees + otherCosts - scrapMetal;
 
     // Calculate COGS Percentage
@@ -43,6 +46,13 @@ function calculateCOGSPercentage() {
     console.log("Profit", profit.toFixed(2))
 
     finalCogDisplay.textContent = cogsPercentage.toFixed(2) + "%";
+    if(cogsPercentage.toFixed(2) < 30){
+        finalCogDisplay.style.color = "red"
+    }else if(cogsPercentage.toFixed(2)>40){
+        finalCogDisplay.style.color = "green"
+    }else{
+        finalCogDisplay.style.color = "yellow"
+    }
     profitDisplay.textContent = profit.toFixed(2);
 
 
@@ -54,3 +64,40 @@ document.querySelector('form').addEventListener('submit', function (event) {
     event.preventDefault(); // Prevent the form from actually submitting
     calculateCOGSPercentage(); // Calculate and display the COGS Percentage
 });
+document.getElementById('clear').addEventListener('click', () => {
+    finalCogDisplay.textContent = ""
+    const inputElements = document.querySelectorAll('input');
+    inputElements.forEach((input) => {
+        input.value = "";
+    });
+});
+
+// Function to update the fuel cost display
+function updateFuelCost() {
+    // Get the values from the input fields and convert them to numbers
+    const fuelAddedGallons = parseFloat(fuelAddedGallonsInput.value) || 0;
+    const pricePerGallon = parseFloat(pricePerGallonInput.value) || 0;
+
+    // Calculate the fuel cost
+    const fuelCost = fuelAddedGallons * pricePerGallon;
+
+    // Update the fuel cost display element
+    fuelCostDisplay.textContent = '$' + fuelCost.toFixed(2); // Display the fuel cost with 2 decimal places
+}
+
+fuelAddedGallonsInput.addEventListener('change', updateFuelCost);
+pricePerGallonInput.addEventListener('change', updateFuelCost);
+
+function updateLaborCost() {
+    const revenuePerHour = parseFloat(revenuePerHourInput.value) || 0;
+    const headCount = parseFloat(headCountInput.value) || 0;
+    const hours = parseFloat(hoursInput.value) || 0;
+    const laborCost = revenuePerHour * headCount * hours;
+    // Update the fuel cost display element
+    laborCostDisplay.textContent = '$' + laborCost.toFixed(2); // Display the labor cost with 2 decimal places
+}
+
+hoursInput.addEventListener('change', updateLaborCost);
+headCountInput.addEventListener('change', updateLaborCost);
+revenuePerHourInput.addEventListener('change', updateLaborCost);
+

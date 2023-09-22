@@ -1,3 +1,11 @@
 *{
     font-family: 'Raleway', sans-serif;
+    
 }
+
+#final-cog-display{
+    background-color: rgb(168, 166, 166);
+    border-radius: 5%;
+    padding: 10px;
+}
+
