@@ -4,8 +4,12 @@
 }
 
 #final-cog-display{
-    background-color: rgb(168, 166, 166);
+    /* background-color: rgb(168, 166, 166); */
     border-radius: 5%;
     padding: 10px;
 }
 
+body{
+    height: 100vh;
+
+}

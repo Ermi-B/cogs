@@ -47,11 +47,11 @@ function calculateCOGSPercentage() {
 
     finalCogDisplay.textContent = cogsPercentage.toFixed(2) + "%";
     if(cogsPercentage.toFixed(2) < 30){
-        finalCogDisplay.style.color = "red"
+        finalCogDisplay.style.backgroundColor = "green"
     }else if(cogsPercentage.toFixed(2)>40){
-        finalCogDisplay.style.color = "green"
+        finalCogDisplay.style.backgroundColor = "red"
     }else{
-        finalCogDisplay.style.color = "yellow"
+        finalCogDisplay.style.backgroundColor = "yellow"
     }
     profitDisplay.textContent = profit.toFixed(2);
 
@@ -66,6 +66,7 @@ document.querySelector('form').addEventListener('submit', function (event) {
 });
 document.getElementById('clear').addEventListener('click', () => {
     finalCogDisplay.textContent = ""
+    finalCogDisplay.style.backgroundColor = "white"
     const inputElements = document.querySelectorAll('input');
     inputElements.forEach((input) => {
         input.value = "";
