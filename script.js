@@ -48,12 +48,15 @@ function calculateCOGSPercentage() {
     finalCogDisplay.textContent = cogsPercentage.toFixed(2) + "%";
     if(cogsPercentage.toFixed(2) < 30){
         finalCogDisplay.style.backgroundColor = "green"
+        finalCogDisplay.style.color = "white"
     }else if(cogsPercentage.toFixed(2)>40){
         finalCogDisplay.style.backgroundColor = "red"
+        finalCogDisplay.style.color = "white"
     }else{
+        finalCogDisplay.style.color = "black"
         finalCogDisplay.style.backgroundColor = "yellow"
     }
-    profitDisplay.textContent = profit.toFixed(2);
+    // profitDisplay.textContent = profit.toFixed(2);
 
 
  
@@ -64,9 +67,12 @@ document.querySelector('form').addEventListener('submit', function (event) {
     event.preventDefault(); // Prevent the form from actually submitting
     calculateCOGSPercentage(); // Calculate and display the COGS Percentage
 });
+//clear event listener
 document.getElementById('clear').addEventListener('click', () => {
     finalCogDisplay.textContent = ""
     finalCogDisplay.style.backgroundColor = "white"
+    fuelCostDisplay.textContent = ""
+    laborCostDisplay.textContent = ""
     const inputElements = document.querySelectorAll('input');
     inputElements.forEach((input) => {
         input.value = "";
@@ -86,8 +92,8 @@ function updateFuelCost() {
     fuelCostDisplay.textContent = '$' + fuelCost.toFixed(2); // Display the fuel cost with 2 decimal places
 }
 
-fuelAddedGallonsInput.addEventListener('change', updateFuelCost);
-pricePerGallonInput.addEventListener('change', updateFuelCost);
+fuelAddedGallonsInput.addEventListener('keyup', updateFuelCost);
+pricePerGallonInput.addEventListener('keyup', updateFuelCost);
 
 function updateLaborCost() {
     const revenuePerHour = parseFloat(revenuePerHourInput.value) || 0;
@@ -98,7 +104,7 @@ function updateLaborCost() {
     laborCostDisplay.textContent = '$' + laborCost.toFixed(2); // Display the labor cost with 2 decimal places
 }
 
-hoursInput.addEventListener('change', updateLaborCost);
-headCountInput.addEventListener('change', updateLaborCost);
-revenuePerHourInput.addEventListener('change', updateLaborCost);
+hoursInput.addEventListener('keyup', updateLaborCost);
+headCountInput.addEventListener('keyup', updateLaborCost);
+revenuePerHourInput.addEventListener('keyup', updateLaborCost);
 

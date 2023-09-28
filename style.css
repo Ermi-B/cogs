@@ -9,7 +9,10 @@
     padding: 10px;
 }
 
-body{
-    height: 100vh;
 
+input{
+    width:5px;
+}
+#total-div{
+    background-color: rgba(224, 240, 245, 0.473);
 }
