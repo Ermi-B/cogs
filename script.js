@@ -33,7 +33,7 @@ function calculateCOGSPercentage() {
     // Calculate the total cost
     const laborCost = revenuePerHour * headCount * hours;
     const fuelCost = fuelAddedGallons * pricePerGallon;
-    laborCostDisplay.textContent = fuelCost
+
     const totalCost = laborCost + fuelCost + totalDumpFees + otherCosts - scrapMetal;
 
     // Calculate COGS Percentage
